@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  devise_for :admins, skip: [:registrations, :passwords] , controllers: {
+  devise_for :admin, skip: [:registrations, :passwords] , controllers: {
     sessions: "admin/sessions"
   }
 
-  devise_for :customers,skip: [:passwords], controllers: {
+  devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
@@ -22,10 +22,10 @@ Rails.application.routes.draw do
   # Public Customers
   resources :customers, only: [:show, :edit, :update] do
     member do
-      get 'profile', to: 'public/customers#show', as: 'profile'
-      get 'profile/edit', to: 'public/customers#edit', as: 'profile/edit'
+      get 'profile', to: 'public/customers#show', as: 'customers/profile'
+      get 'profile/edit', to: 'public/customers#edit', as: 'customers/profile/edit'
       patch 'profile', to: 'public/customers#update'
-      get 'unsubscribe', to: 'public/customers#unsubscribe', as: 'unsubscribe'
+      get 'unsubscribe', to: 'public/customers#unsubscribe', as: 'customers/unsubscribe'
       patch 'withdraw', to: 'public/customers#withdraw', as: 'withdraw'
     end
   end
@@ -41,6 +41,11 @@ Rails.application.routes.draw do
 
   # Admin Static Pages
   get 'public/static_pages/terms', to: 'public/static_pages#terms'
+
+  # 管理者用
+  namespace :admin do
+    root to: 'homes#top'
+  end
 
   # Admin Static Pages
   get 'admin/static_pages/terms', to: 'admin/static_pages#terms'
