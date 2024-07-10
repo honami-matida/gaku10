@@ -20,13 +20,16 @@
                 ようこそ、<%= current_customer.name %>さん！
               </li>
               <li class="nav-item">
-                <%#= link_to "マイページ", my_page_path, class: "btn btn-outline-warning text-dark"  %>
+                <%= link_to "マイページ", "/customers/#{current_customer.id}/profile", class: "btn btn-outline-warning text-dark"  %>
               </li>
               <li class="nav-item">
                 <%= link_to "About", about_path, class: "btn btn-outline-warning text-dark"  %>
               </li>
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_customer_session_path, class: "btn btn-outline-warning text-dark" , method: :delete%>
+              </li>
+              <li class="nav-item">
+                <%= link_to "投稿する", new_public_post_path, class: "btn btn-outline-warning text-dark"%>
               </li>
             <% elsif admin_signed_in? %>
               <!-- 管理者がログインしている時 -->

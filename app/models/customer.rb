@@ -10,4 +10,9 @@ class Customer < ApplicationRecord
   has_many :groups, dependent: :destroy #会員id(オーナーの取得)
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+
+  #is_deletedがfalseならtrueを返すようにしている
+  def active_for_authentication?
+    super && (is_active == true)
+  end
 end

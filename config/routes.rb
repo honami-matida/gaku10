@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get 'about', to: 'public/homes#about', as: 'about'
 
   # Public Posts
-  resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  namespace :public do
+    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  end
 
   # Public Post Comments
   resources :post_comments, only: [:create, :destroy]
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
       get 'profile/edit', to: 'public/customers#edit', as: 'customers/profile/edit'
       patch 'profile', to: 'public/customers#update'
       get 'unsubscribe', to: 'public/customers#unsubscribe', as: 'customers/unsubscribe'
-      patch 'withdraw', to: 'public/customers#withdraw', as: 'withdraw'
+      patch 'withdraw', to: 'public/customers#withdraw', as: 'customers/withdraw'
     end
   end
 

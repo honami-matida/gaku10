@@ -1,2 +1,27 @@
 <h2>ようこそ、がく10へ</h2>
 <p>がく10は学童の先生同士で交流できるコミュニティサイトです</p>
+
+<table class="table table-hover table-inverse">
+  <thread>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thread>
+  <tbody>
+    <% @posts.each do |post| %>
+    <tr>
+      <td><%= link_to post.user do %>
+          <%#= image_tag book.user.get_profile_image, size:'50x50' %>
+          <% end %>
+      </td>
+      <td><%= link_to post.title,post %></td>
+      <td><%= post.introduction %></td>
+      <td><%#= render "favorites/btn", book: book %></td>
+      <td>コメント数： <%#= book.book_comments.count %></td>
+    </tr>
+   <% end %>
+   </tbody>
+ </table>
