@@ -7,4 +7,5 @@ class Post < ApplicationRecord
 
   validates :title, presence: true
   validates :introduction, presence: true
+  validates :genre_id, presence: true
 end

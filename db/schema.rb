@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2024_07_08_141739) do
   end
 
   create_table "favorites", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -52,27 +54,33 @@ ActiveRecord::Schema.define(version: 2024_07_08_141739) do
   end
 
   create_table "group_users", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "groups", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "introduction", null: false
+    t.integer "genre_id"
+    t.string "name"
+    t.text "introduction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "post_comments", force: :cascade do |t|
-    t.text "comment", null: false
+    t.integer "post_id"
+    t.integer "customer_id"
+    t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "posts", force: :cascade do |t|
     t.integer "customer_id"
-    t.string "title", null: false
-    t.text "introduction", null: false
+    t.integer "genre_id"
+    t.string "title"
+    t.text "introduction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

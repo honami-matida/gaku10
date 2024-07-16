@@ -9,7 +9,8 @@ class Admin::GenresController < ApplicationController
     if @genre.save
       redirect_to admin_genres_path, notice: "ジャンルを登録しました"
     else
-      @genre = Genre.all
+      flash.now[:notice] = "登録に失敗しました"
+      @genres = Genre.all
       render :index
     end
   end
