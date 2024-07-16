@@ -3,7 +3,7 @@
     <div class="col">
       <h4 class="my-5">会員情報編集</h4>
       <table class="table table-borderless">
-        <%= form_with model: @customer, url: customers_profile_customer_path, method: :patch do |f| %>
+        <%= form_with model: @customer, url: profile_customer_path, method: :patch do |f| %>
           <tr>
             <td>アイコン画像</td>
             <td></td>
@@ -24,7 +24,7 @@
           <tr>
             <td></td>
             <td><%= f.submit "編集内容を保存", class:"btn btn-success" %></td>
-            <td><%= link_to "退会する", customers_unsubscribe_customer_path, class:"btn btn-danger" %></td>
+            <td><%= link_to "退会する", unsubscribe_customer_path, class:"btn btn-danger" %></td>
           </tr>
         <% end %>
       </table>

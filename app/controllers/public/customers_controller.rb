@@ -8,9 +8,13 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-    customer = current_customer
-    customer.update(customer_params)
-    redirect_to customers_profile_customer_path
+    @customer = current_customer
+    if @current_customer.update(customer_params)
+      redirect_to profile_customer_path, notice: "保存しました"
+    else
+      flash.now[:alert] = "保存できません"
+      render :edit
+    end
   end
 
   def unsubscribe
@@ -24,7 +28,7 @@ class Public::CustomersController < ApplicationController
     @customer.update(is_active: false)
     reset_session
     flash[:notice] = "退会処理を実行いたしました"
-    redirect_to root_path
+    redirect_to new_customer_registration_path
   end
 
   private
