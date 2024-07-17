@@ -8,4 +8,8 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :introduction, presence: true
   validates :genre_id, presence: true
+
+  def self.search_for(word, method)
+    Customer.where('title LIKE ?', '%' + word + '%')
+  end
 end

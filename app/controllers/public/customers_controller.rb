@@ -1,6 +1,11 @@
 class Public::CustomersController < ApplicationController
+
+  def index
+    @customers = Customer.all
+  end
+
   def show
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
   end
 
   def edit
@@ -34,6 +39,6 @@ class Public::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:name, :email, :introduction)
+    params.require(:customer).permit(:name, :email, :introduction, :profile_image)
   end
 end

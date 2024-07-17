@@ -4,10 +4,13 @@
       <h4 class="my-5">マイページ</h4>
         <div class="d-flex align-items-center">
           <h3><b>登録情報</b></h3>
-          <%= link_to "編集する", profile_edit_customer_path, class:"btn btn-success ml-3" %>
+          <% if customer_signed_in? && current_customer.id == @customer.id %>
+            <%= link_to "編集する", profile_edit_customer_path, class:"btn btn-success ml-3" %>
+          <% end %>
         </div>
           <div>
             icon
+            <%= image_tag @customer.get_profile_image(100,100) %>
           </div>
           <table class="table table-bordered">
             <tr>

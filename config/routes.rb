@@ -14,8 +14,9 @@ Rails.application.routes.draw do
   get 'about', to: 'public/homes#about', as: 'about'
 
     # Public Customers
-  resources :customers, only: [:show, :edit, :update] do
+  resources :customers, only: [:index, :show, :edit, :update] do
     member do
+      get '', to: 'public/customers#index', as: 'users'
       get 'profile', to: 'public/customers#show', as: 'profile'
       get 'profile/edit', to: 'public/customers#edit', as: 'profile/edit'
       patch 'profile', to: 'public/customers#update'
@@ -36,7 +37,7 @@ Rails.application.routes.draw do
     resources :groups, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 
     # Public Searches
-    resources :searches, only: [:search]
+    get 'searches/search', to: 'searches#search', as: 'search'
 
     # Public Static Pages
     get 'static_pages/terms', to: 'static_pages#terms'
