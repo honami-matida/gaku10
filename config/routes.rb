@@ -52,9 +52,10 @@ Rails.application.routes.draw do
     resources :sessions, only: [:new, :create, :destroy]
 
     # Admin Posts
-    resources :posts, only: [:index, :show, :delete] do
-      resources :post_comments, only: [:index, :show, :destroy]
-    end
+    resources :posts, only: [:index, :show, :delete]
+
+    #Admin Post_comments
+    resources :post_comments, only: [:index, :show, :destroy]
 
     # Admin Genres
     resources :genres, only: [:index, :create, :edit, :update]

@@ -1,2 +1,50 @@
 <h1>Admin::Customers#show</h1>
 <p>Find me in app/views/admin/customers/show.html.erb</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="d-flex align-items-center">
+        <h3><b>会員登録情報</b></h3>
+      </div>
+      <div>
+        icon
+        <%= image_tag @customer.get_profile_image(100,100) %>
+      </div>
+      <table class="table table-bordered">
+        <tr>
+          <td class="bg-light">ニックネーム</td>
+          <td><%= @customer.name %></td>
+        </tr>
+        <tr>
+          <td class="bg-light">メールアドレス</td>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <td class="bg-light">自己紹介文</td>
+          <td><%= @customer.introduction %></td>
+        </tr>
+        <tr>
+          <td class="bg-light">コメント</td>
+          <td><%= "#{@customer.post_comments.count} コメント" %></td>
+        </tr>
+        <%= form_with model: [:admin, @customer] do |f| %>
+          <tr>
+            <td class ="bg-light">会員ステータス</td>
+            <td>
+              <%= f.radio_button :is_active, :true %>
+              <%= f.label :is_active, "有効" %>
+
+              <%= f.radio_button :is_active, :false %>
+              <%= f.label :is_active, "退会" %>
+            </td>
+          </tr>
+          <tr>
+            <td class ="bg-light"></td>
+            <td><%= f.submit "変更を保存", class:"btn btn-success" %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
