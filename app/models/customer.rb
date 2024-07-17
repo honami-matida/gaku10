@@ -29,7 +29,7 @@ class Customer < ApplicationRecord
     super && (is_active == true)
   end
 
-  def self.search_for(word, method)
-    Customer.where('name LIKE ?', '%' + word + '%')
+  def self.search_for(word)
+    where('name LIKE ?', "%#{word}%")
   end
 end
