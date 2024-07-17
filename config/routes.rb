@@ -13,19 +13,20 @@ Rails.application.routes.draw do
   root 'public/homes#top'
   get 'about', to: 'public/homes#about', as: 'about'
 
-    # Public Customers
-  resources :customers, only: [:index, :show, :edit, :update] do
-    member do
-      get '', to: 'public/customers#index', as: 'users'
-      get 'profile', to: 'public/customers#show', as: 'profile'
-      get 'profile/edit', to: 'public/customers#edit', as: 'profile/edit'
-      patch 'profile', to: 'public/customers#update'
-      get 'unsubscribe', to: 'public/customers#unsubscribe', as: 'unsubscribe'
-      patch 'withdraw', to: 'public/customers#withdraw', as: 'withdraw'
-    end
-  end
-
   namespace :public do
+
+    resources :customers, only: [:show, :edit, :update] do
+      collection do
+        get 'list', to: 'customers#index', as: 'list'
+      end
+      member do
+        get 'profile', to: 'customers#show', as: 'profile'
+        get 'profile/edit', to: 'customers#edit', as: 'profile/edit'
+        patch 'profile', to: 'customers#update'
+        get 'unsubscribe', to: 'customers#unsubscribe', as: 'unsubscribe'
+        patch 'withdraw', to: 'customers#withdraw', as: 'withdraw'
+      end
+    end
 
     # Public Posts
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do

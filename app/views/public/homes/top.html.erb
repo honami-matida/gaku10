@@ -24,7 +24,7 @@
       <td><%= image_tag post.customer.get_profile_image(50,50) %></td>
       <td><%= post.customer.name %></td>
       <td><%#= render "favorites/btn", book: book %></td>
-      <td>コメント数： <%#= book.book_comments.count %></td>
+      <td>コメント数： <%= "#{post.post_comments.count} コメント" %></td>
     </tr>
    <% end %>
    </tbody>

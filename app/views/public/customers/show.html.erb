@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
           <h3><b>登録情報</b></h3>
           <% if customer_signed_in? && current_customer.id == @customer.id %>
-            <%= link_to "編集する", profile_edit_customer_path, class:"btn btn-success ml-3" %>
+            <%= link_to "編集する", profile_edit_public_customer_path, class:"btn btn-success ml-3" %>
           <% end %>
         </div>
           <div>
@@ -24,6 +24,10 @@
             <tr>
               <td class="bg-light">自己紹介文</td>
               <td><%= @customer.introduction %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">コメント</td>
+              <td><%= "#{@customer.post_comments.count} コメント" %></td>
             </tr>
           </table>
     </div>
