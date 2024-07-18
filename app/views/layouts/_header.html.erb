@@ -3,8 +3,18 @@
 
         <div class="container">
 
-            <%= link_to root_path, class:"navbar-brand p-3" do %>LOGO
-            <%#= image_tag "logo.png", size:'200x80'%>
+            <% if customer_signed_in? %>
+              <%= link_to public_posts_path, class:"navbar-brand p-3" do %>LOGO
+              <%#= image_tag "logo.png", size:'200x80'%>
+              <% end %>
+            <% elsif admin_signed_in? %>
+              <%= link_to admin_root_path, class:"navbar-brand p-3" do %>LOGO
+              <%#= image_tag "logo.png", size:'200x80'%>
+              <% end %>
+            <% else %>
+              <%= link_to root_path, class:"navbar-brand p-3" do %>LOGO
+              <%#= image_tag "logo.png", size:'200x80'%>
+              <% end %>
             <% end %>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
