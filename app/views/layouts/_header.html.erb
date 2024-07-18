@@ -4,16 +4,16 @@
         <div class="container">
 
             <% if customer_signed_in? %>
-              <%= link_to public_posts_path, class:"navbar-brand p-3" do %>LOGO
-              <%#= image_tag "logo.png", size:'200x80'%>
+              <%= link_to public_posts_path, class:"navbar-brand p-3" do %>
+              <%= image_tag "logo.png", size:'200x80'%>
               <% end %>
             <% elsif admin_signed_in? %>
-              <%= link_to admin_root_path, class:"navbar-brand p-3" do %>LOGO
-              <%#= image_tag "logo.png", size:'200x80'%>
+              <%= link_to admin_root_path, class:"navbar-brand p-3" do %>
+              <%= image_tag "logo.png", size:'200x80'%>
               <% end %>
             <% else %>
-              <%= link_to root_path, class:"navbar-brand p-3" do %>LOGO
-              <%#= image_tag "logo.png", size:'200x80'%>
+              <%= link_to root_path, class:"navbar-brand p-3" do %>
+              <%= image_tag "logo.png", size:'200x80'%>
               <% end %>
             <% end %>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -25,12 +25,15 @@
           <ul class="navbar-nav ml-auto">
             <% if customer_signed_in? %>
 
-            <!--カスタマーがログインしている時 -->
+            <!--会員がログインしている時 -->
               <li class="nav-item">
                 ようこそ、<%= current_customer.name %>さん！
               </li>
               <li class="nav-item">
-                <%= link_to "マイページ", "/customers/#{current_customer.id}/profile", class: "btn btn-outline-warning text-dark"  %>
+                <%= link_to "会員一覧", list_public_customers_path, class: "btn btn-outline-warning text-dark"  %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ジャンル", public_genres_path, class: "btn btn-outline-warning text-dark"  %>
               </li>
               <li class="nav-item">
                 <%= link_to "About", about_path, class: "btn btn-outline-warning text-dark"  %>
@@ -40,6 +43,9 @@
               </li>
               <li class="nav-item">
                 <%= link_to "投稿する", new_public_post_path, class: "btn btn-outline-warning text-dark"%>
+              </li>
+              <li class="nav-item">
+                <%= link_to "マイページ", public_customer_path(current_customer), class: "btn btn-outline-warning text-dark"  %>
               </li>
             <% elsif admin_signed_in? %>
               <!-- 管理者がログインしている時 -->
@@ -79,9 +85,7 @@
             <%#= f.submit '検索', class: 'ml-1 btn btn-outline-warning flex-shrink-0' %>
           <%# end %>
 
-          <% if admin_signed_in? %>
-            <%#= render "admin/searches/search" %>
-          <% else %>
+          <% if customer_signed_in? %>
             <div class="search_form">
               <%= form_with url: public_search_path, local: true, method: :get do |f| %>
                 <%= f.text_field :word %>

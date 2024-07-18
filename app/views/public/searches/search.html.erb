@@ -13,11 +13,11 @@
         <% @records.each do |customer| %>
           <tr>
             <td>
-              <%= link_to profile_customer_path(customer) do %>
+              <%= link_to profile_public_customer_path(customer) do %>
                 <%= image_tag customer.get_profile_image(50,50) %>
               <% end %>
             </td>
-            <td><%= link_to customer.name, profile_customer_path(customer) %></td>
+            <td><%= link_to customer.name, profile_public_customer_path(customer) %></td>
             <td><%= customer.introduction %></td>
           </tr>
         <% end %>

@@ -1,6 +1,11 @@
 <footer class="footer">
   <div class="container" style="background-color: #ffffe0;">
     <p class="text-muted">Place sticky footer content here.</p>
+    <% unless admin_signed_in? %>
+      <%= link_to "サイトのご利用にあたって", public_static_pages_terms_path, class: "text-muted" %>
+    <% else %>
+      <%= link_to "サイトのご利用にあたって", admin_static_pages_terms_path, class: "text-muted" %>
+    <% end %>
   </div>
-  
+
 </footer>

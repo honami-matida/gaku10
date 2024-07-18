@@ -6,7 +6,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   #サインアップした遷移先
   def after_sign_up_path_for(resource)
-    profile_customer_path(resource)
+    profile_public_customer_path(resource)
   end
 
   # GET /resource/sign_up
