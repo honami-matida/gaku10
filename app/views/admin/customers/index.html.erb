@@ -1,6 +1,3 @@
-<h1>Admin::Customers#index</h1>
-<p>Find me in app/views/admin/customers/index.html.erb</p>
-
 <table class="table table-hover table-inverse">
   <thead>
     <tr>
@@ -13,22 +10,24 @@
   </thead>
   <tbody>
     <% @customers.each do |customer| %>
-    <tr>
-      <td>
-        <%= link_to admin_customer_path(customer) do %>
-          <%= image_tag customer.get_profile_image(50,50) %>
-        <% end %>
-      </td>
-      <td><%= link_to customer.name, admin_customer_path(customer) %></td>
-      <td><%= customer.introduction %></td>
-      <td>
-        <% if customer.is_active %>
-          <span class = "text-success">有効</span>
-        <% else %>
-          <span class = "text-secondary">退会</span>
-        <% end %>
-      </td>
-    </tr>
-   <% end %>
+      <% unless customer.guest_customer? %>
+        <tr>
+          <td>
+            <%= link_to admin_customer_path(customer) do %>
+              <%= image_tag customer.get_profile_image(50,50), class:"icon" %>
+            <% end %>
+          </td>
+          <td><%= link_to customer.name, admin_customer_path(customer) %></td>
+          <td><%= customer.introduction %></td>
+          <td>
+            <% if customer.is_active %>
+              <span class = "text-success">有効</span>
+            <% else %>
+              <span class = "text-secondary">退会</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
    </tbody>
  </table>

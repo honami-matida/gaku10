@@ -24,6 +24,20 @@ class Customer < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
 
+  GUEST_CUSTOMER_EMAIL = "guest@example.com"
+
+  #ゲストログイン機能
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.name = "ゲスト"
+    end
+  end
+
+  def guest_customer?
+    email == GUEST_CUSTOMER_EMAIL
+  end
+
   #is_deletedがfalseならtrueを返すようにしている
   def active_for_authentication?
     super && (is_active == true)

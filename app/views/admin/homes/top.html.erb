@@ -22,7 +22,7 @@
       <td><%= link_to post.title, admin_post_path(post) %></td>
       <td><%= post.introduction %></td>
       <td><%= post.genre.name %></td>
-      <td><%= image_tag post.customer.get_profile_image(50,50) %></td>
+      <td><%= image_tag post.customer.get_profile_image(50,50), class:"icon" %></td>
       <td><%= post.customer.name %></td>
       <td><%#= render "favorites/btn", book: book %></td>
       <td>コメント数： <%= "#{post.post_comments.count} コメント" %></td>

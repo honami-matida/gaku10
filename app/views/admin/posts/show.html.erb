@@ -5,7 +5,7 @@
   <p>タイトル：<%= @post.title %></p>
   <p>説明：<%= @post.introduction %></p>
   <p>ジャンル：<%= @post.genre.name %></p>
-  <p>投稿ユーザー画像：<%= image_tag @post.customer.get_profile_image(100,100) %></p>
+  <p>投稿ユーザー画像：<%= image_tag @post.customer.get_profile_image(50,50), class:"icon" %></p>
   <p>ユーザーネーム：<%= @post.customer.name %></p>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
 </div>
@@ -15,7 +15,7 @@
 <div>
   <p>コメント件数：<%= @post.post_comments.count %></p>
   <% @post.post_comments.each do |post_comment| %>
-    <p><%= image_tag post_comment.customer.get_profile_image(100,100) %></p>
+    <p><%= image_tag post_comment.customer.get_profile_image(50,50), class:"icon" %></p>
     <%= link_to admin_post_comment_path(post_comment) do %>
       <%= post_comment.customer.name %>
     <% end %>
