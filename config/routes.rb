@@ -41,7 +41,8 @@ Rails.application.routes.draw do
     # Public Groups
     resources :groups, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 
-    get 'genres', to: 'genres#index', as: 'genres'
+    resources :genres, only: [:index, :show]
+    #get 'genres', to: 'genres#index', as: 'genres'
 
     # Public Searches
     get 'searches/search', to: 'searches#search', as: 'search'
