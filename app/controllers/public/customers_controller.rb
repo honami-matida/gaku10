@@ -1,5 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :ensure_guest_customer, only: [:edit]
+  before_action :authenticate_customer!, only: [:edit]
 
   def index
     @customers = Customer.all
@@ -7,16 +8,18 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    @posts = @customer.posts
   end
 
   def edit
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
+
   end
 
   def update
     @customer = current_customer
     if @current_customer.update(customer_params)
-      redirect_to profile_customer_path, notice: "保存しました"
+      redirect_to profile_public_customer_path(@customer), notice: "保存しました"
     else
       flash.now[:alert] = "保存できません"
       render :edit
@@ -47,6 +50,13 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     if @customer.guest_customer?
       redirect_to public_customer_path(current_customer) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    end
+  end
+
+  def authenticate_customer!
+    unless customer_signed_in?
+      flash[:alert] = "ログインが必要です。"
+      redirect_to root_path
     end
   end
 end

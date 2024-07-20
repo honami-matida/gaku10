@@ -14,7 +14,7 @@
         <% unless customer.guest_customer? %>
         <tr>
           <td>
-            <%= link_to public_customer_path(customer) do %>
+            <%= link_to public_customer_path(customer), style:"text-decoration: none;" do %>
               <%= image_tag customer.get_profile_image(50,50), class:"icon" %>
             <% end %>
           </td>

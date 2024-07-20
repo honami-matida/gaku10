@@ -1,12 +1,16 @@
 class Public::PostCommentsController < ApplicationController
 
   def create
-    post = Post.find(params[:post_id])
-    post_comment = PostComment.new(post_comment_params)
-    post_comment.customer_id = current_customer.id
-    post_comment.post_id = post.id
-    post_comment.save
-    redirect_to public_post_path(post)
+    @post = Post.find(params[:post_id])
+    @post_comment = PostComment.new(post_comment_params)
+    @post_comment.customer_id = current_customer.id
+    @post_comment.post_id = @post.id
+    if @post_comment.save
+      redirect_to public_post_path(@post)
+    else
+      flash.now[:notice] = "送信に失敗しました"
+      render 'public/posts/show'
+    end
   end
 
   def destroy

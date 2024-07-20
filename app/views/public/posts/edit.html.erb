@@ -20,6 +20,11 @@
           <tr>
             <td></td>
             <td><%= f.submit "編集内容を保存", class:"btn btn-success" %></td>
+            <td>
+              <% if @post.customer == current_customer %>
+                <%= link_to "削除する", public_post_path(@post), method: :delete, class:"btn btn-success ml-3" %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </table>
