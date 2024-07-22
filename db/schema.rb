@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_17_052319) do
+ActiveRecord::Schema.define(version: 2024_07_22_123316) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 2024_07_17_052319) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "group_requests", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "group_id", null: false
+    t.integer "is_status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_group_requests_on_customer_id"
+    t.index ["group_id"], name: "index_group_requests_on_group_id"
+  end
+
   create_table "group_users", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "group_id"
@@ -92,8 +102,10 @@ ActiveRecord::Schema.define(version: 2024_07_17_052319) do
     t.integer "genre_id"
     t.string "name"
     t.text "introduction"
+    t.integer "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_groups_on_owner_id"
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -115,4 +127,7 @@ ActiveRecord::Schema.define(version: 2024_07_17_052319) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "group_requests", "customers"
+  add_foreign_key "group_requests", "groups"
+  add_foreign_key "groups", "customers", column: "owner_id"
 end

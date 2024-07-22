@@ -9,6 +9,10 @@ class Post < ApplicationRecord
   validates :introduction, presence: true
   validates :genre_id, presence: true
 
+  def favorited?(customer)
+    favorites.where(customer_id: customer.id).exists?
+  end
+
   def self.search_for(word)
     where('title LIKE ?', "%#{word}%")
   end

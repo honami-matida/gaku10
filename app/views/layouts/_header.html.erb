@@ -6,6 +6,7 @@
             <% if customer_signed_in? %>
               <%= link_to public_posts_path, class:"navbar-brand p-3" do %>
               <%= image_tag "logo.png", size:'200x80'%>
+              <%= image_tag "logo2.png", size:'80x80'%>
               <% end %>
             <% elsif admin_signed_in? %>
               <%= link_to admin_root_path, class:"navbar-brand p-3" do %>

@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts, dependent: :destroy
+  has_many :group_requests
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
   has_many :groups, dependent: :destroy #会員id(オーナーの取得)
