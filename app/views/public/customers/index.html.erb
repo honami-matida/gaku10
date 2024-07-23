@@ -1,4 +1,4 @@
-<h1>会員一覧</h1>
+<h1></h1>
 
 <%=link_to "グループを作成する",new_public_group_path %> |
 <%=link_to "グループ一覧",public_groups_path %>
@@ -26,5 +26,7 @@
         </tr>
       <% end %>
      <% end %>
-     </tbody>
+    </tbody>
  </table>
+
+ <%= paginate @customers, theme: 'bootstrap-5' %>

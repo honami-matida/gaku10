@@ -25,7 +25,6 @@
               <% else %>
 
               <!--申請ボタン-->
-                <% Rails.logger.debug "Current request status: #{@group_request&.is_status}" %>
                 <% if @group_request.nil? %>
                   <%= button_to 'グループに申請', public_group_group_requests_path(@group), method: :post, class: "btn btn-primary" %>
                 <% elsif @group_request.pending? %>
@@ -55,8 +54,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <% @group.group_requests.pending.each do |request| %>
+            <% @group.group_requests.pending.each do |request| %>
+              <tr>
                 <th>
                   <%= link_to public_customer_path(request.customer) do %>
                     <%= request.customer.name %>
@@ -68,9 +67,11 @@
                 <th>
                   <%= button_to '拒否', public_group_group_request_path(request, is_status: :rejected), method: :patch, class: "btn btn-danger" %>
                 </th>
-              <% end %>
-            </tr>
+              </tr>
+            <% end %>
           </tbody>
         </table>
+
+        <%= paginate @group_requests, theme: 'bootstrap-5' %>
       <% end %>
     </div>

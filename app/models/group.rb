@@ -10,6 +10,8 @@ class Group < ApplicationRecord
   validates :introduction, presence: true
   has_one_attached :group_image
 
+  paginates_per 9
+
   def get_group_image(width, height)
     unless group_image.attached?
       file_path = Rails.root.join('app/assets/images/default-image.jpg')

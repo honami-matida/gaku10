@@ -3,12 +3,12 @@ class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!, only: [:edit]
 
   def index
-    @customers = Customer.all
+    @customers = Customer.all.page(params[:page]).per(9)
   end
 
   def show
     @customer = Customer.find(params[:id])
-    @posts = @customer.posts
+    @posts = @customer.posts.page(params[:page]).per(9)
   end
 
   def edit

@@ -6,7 +6,7 @@ class Public::GenresController < ApplicationController
 
   def show
     @genre = Genre.find(params[:id])
-    @posts = @genre.posts
+    @posts = @genre.posts.page(params[:page]).per(9)
   end
 
   private

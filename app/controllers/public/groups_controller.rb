@@ -19,15 +19,16 @@ class Public::GroupsController < ApplicationController
   end
 
   def index
-    @groups = Group.all
+    @groups = Group.all.page(params[:page]).per(9)
     @customer = Customer.find(current_customer.id)
   end
 
   def show
     @group = Group.find(params[:id])
     @customer = Customer.find(params[:id])
-    @owner =Customer.find(@group.owner_id)
+    @owner = Customer.find(@group.owner_id)
     @group_request = @group.group_requests.find_by(customer: current_customer)
+    @group_requests = @group.group_requests.page(params[:page]).per(9)
   end
 
   def edit
