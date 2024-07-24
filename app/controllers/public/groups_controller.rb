@@ -12,8 +12,7 @@ class Public::GroupsController < ApplicationController
     if @group.save
       redirect_to public_group_path(@group), notice: "グループを作成しました。"
     else
-      flash.now[:alert] = @group.errors.full_messages.join(", ")
-      #flash.now[:alert] = "作成できません"
+      flash.now[:alert] = "作成できません"
       render 'new'
     end
   end
@@ -25,10 +24,11 @@ class Public::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @customer = Customer.find(params[:id])
     @owner = Customer.find(@group.owner_id)
+    @group_approved = @group.group_requests.approved
     @group_request = @group.group_requests.find_by(customer: current_customer)
-    @group_requests = @group.group_requests.page(params[:page]).per(9)
+    @group_requests = @group.group_requests.pending
+    @group_requests = @group.group_requests.pending.page(params[:page]).per(9)
   end
 
   def edit

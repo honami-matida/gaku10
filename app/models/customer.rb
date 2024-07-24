@@ -27,8 +27,6 @@ class Customer < ApplicationRecord
 
   GUEST_CUSTOMER_EMAIL = "guest@example.com"
 
-  paginates_per 9
-
   #ゲストログイン機能
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |customer|

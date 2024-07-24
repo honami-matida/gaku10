@@ -4,6 +4,4 @@ class PostComment < ApplicationRecord
 
   validates :comment, presence: true
 
-  paginates_per 9
-
 end

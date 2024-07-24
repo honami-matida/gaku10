@@ -14,8 +14,6 @@ class Post < ApplicationRecord
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}
 
-  paginates_per 9
-
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
   end

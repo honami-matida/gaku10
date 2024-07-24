@@ -18,10 +18,10 @@ class Public::GroupRequestsController < ApplicationController
     @group_request = GroupRequest.find(params[:id])
 
     if params[:is_status] == 'approved'
-      @group_request.update(is_status: :approved)
+      @group_request.update(is_status: 1)
       flash[:notice] = "申請を承認しました"
     elsif params[:is_status] == 'rejected'
-      @group_request.update(is_status: :rejected)
+      @group_request.update(is_status: 2)
       flash[:notice] = "申請を拒否しました"
     end
 

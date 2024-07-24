@@ -1,7 +1,8 @@
 class Group < ApplicationRecord
+
+  has_many :group_users, dependent: :destroy
   has_many :customers, through: :group_users
   has_many :group_requests
-  has_many :group_users, dependent: :destroy
 
   belongs_to :owner, class_name: 'Customer', foreign_key: 'owner_id' #会員id(オーナー)の取得
   belongs_to :genre
@@ -9,8 +10,6 @@ class Group < ApplicationRecord
   validates :name, presence: true
   validates :introduction, presence: true
   has_one_attached :group_image
-
-  paginates_per 9
 
   def get_group_image(width, height)
     unless group_image.attached?

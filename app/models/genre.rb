@@ -5,7 +5,5 @@ class Genre < ApplicationRecord
   validates :name, presence: true
   validates :introduction, presence: true
 
-  paginates_per 9
-
   #validates :name, uniqueness: true, presence: true
 end
