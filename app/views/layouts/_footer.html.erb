@@ -2,9 +2,9 @@
   <div class="container">
     <p class="text-muted">Place sticky footer content here.</p>
     <% unless admin_signed_in? %>
-      <%= link_to "サイトのご利用にあたって", public_static_pages_terms_path, class: "text-muted" %>
+      <%= link_to "利用規約", public_static_pages_terms_path, class: "text-muted" %>
     <% else %>
-      <%= link_to "サイトのご利用にあたって", admin_static_pages_terms_path, class: "text-muted" %>
+      <%= link_to "利用規約", admin_static_pages_terms_path, class: "text-muted" %>
     <% end %>
   </div>
 

@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :ensure_guest_customer, only: [:new]
   before_action :authenticate_customer!, only: [:new, :show, :edit]
   before_action :is_matching_login_customer, only: [:edit, :update]
 
@@ -83,6 +84,13 @@ class Public::PostsController < ApplicationController
     unless customer.id == current_customer.id
       flash[:alert] = "投稿した会員でないので編集できません。"
       redirect_to root_path
+    end
+  end
+
+  def ensure_guest_customer
+    
+    if current_customer.guest_customer?
+      redirect_to public_customer_path(current_customer) , notice: "ゲストユーザーは新規投稿画面へ遷移できません。"
     end
   end
 

@@ -7,12 +7,12 @@
 }
 
 footer {
-  background-color: #ffffe0;
+  background-color: #93b3ca;
 }
 
 .profile_icon {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -22,4 +22,12 @@ footer {
   height: 50px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.text-wrap {
+  word-wrap: break-word;
+}
+
+table td {
+  word-break : break-all;
 }
