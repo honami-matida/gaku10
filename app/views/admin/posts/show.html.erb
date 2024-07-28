@@ -1,26 +1,42 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<div class="container">
+  <div class="row h3 py-5">
+    <div class="col  mx-auto">
+      投稿詳細
+    </div>
+  </div>
 
-<div>
-  <p>タイトル：<%= @post.title %></p>
-  <p>説明：<%= @post.introduction %></p>
-  <p>ジャンル：<%= @post.genre.name %></p>
-  <p>投稿ユーザー画像：<%= image_tag @post.customer.get_profile_image(50,50), class:"icon" %></p>
-  <p>ユーザーネーム：<%= @post.customer.name %></p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-</div>
+  <div class="row">
+    <div class="col">
+      <p class="row">タイトル：<%= @post.title %></p>
+      <p class="row text-wrap">説明：<%= @post.introduction %></p>
+      <p class="row">ジャンル：<%= @post.genre.name %></p>
+      <p class="row">投稿ユーザー画像：<%= image_tag @post.customer.get_profile_image(50,50), class:"icon" %></p>
+      <p class="row">ユーザーネーム：<%= @post.customer.name %></p>
+      <p class="row">投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+    </div>
+  </div>
 
 <%#= link_to "削除する", admin_post_path(@post), method: :delete, class:"btn btn-success ml-3" %>
 
-<div>
-  <p>コメント件数：<%= @post.post_comments.count %></p>
-  <% @post.post_comments.each do |post_comment| %>
-    <p><%= image_tag post_comment.customer.get_profile_image(50,50), class:"icon" %></p>
-    <%= link_to admin_post_comment_path(post_comment) do %>
-      <%= post_comment.customer.name %>
-    <% end %>
-    <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+  <div class="row">
+    <div class="col">
+      <p>コメント件数：<%= @post_comments.count %></p>
+      <% @post_comments.each do |post_comment| %>
+        <p><%= post_comment.comment %></p>
+        <div>
+          <%= image_tag post_comment.customer.get_profile_image(50,50), class:"icon" %>
+          <%= link_to admin_post_comment_path(post_comment) do %>
+            <%= post_comment.customer.name %>
+          <% end %>
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+        </div>
+        <%#= link_to "削除", admin_post_post_comment_path(@post, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
+      <% end %>
+    </div>
+  </div>
 
-    <%#= link_to "削除", admin_post_post_comment_path(@post, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
-  <% end %>
+  <div class="row mx-auto my-5">
+    <%= paginate @post_comments, theme: 'bootstrap-5' %>
+  </div>
+
 </div>

@@ -42,6 +42,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
+    @post_comments = @post.post_comments.all.page(params[:page]).per(9).order(created_at: :desc)
   end
 
   def edit
@@ -80,7 +81,8 @@ class Public::PostsController < ApplicationController
   end
 
   def is_matching_login_customer
-    customer = Customer.find(params[:id])
+    @post = Post.find(params[:id])
+    customer = @post.customer
     unless customer.id == current_customer.id
       flash[:alert] = "投稿した会員でないので編集できません。"
       redirect_to root_path
@@ -88,7 +90,7 @@ class Public::PostsController < ApplicationController
   end
 
   def ensure_guest_customer
-    
+
     if current_customer.guest_customer?
       redirect_to public_customer_path(current_customer) , notice: "ゲストユーザーは新規投稿画面へ遷移できません。"
     end

@@ -1,10 +1,26 @@
-<h1>画像投稿フォーム</h1>
-<%= form_with model: @post, url: public_posts_path do |f| %>
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-  <h4>本文</h4>
-  <%= f.text_area :introduction %>
-  <h4>ジャンル</h4>
-  <%= f.collection_select :genre_id, Genre.all, :id, :name %>
-  <%= f.submit '投稿' %>
-<% end %>
+<div class="container">
+  <div class="row py-3 mt-5">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <div class="row ">
+        <div class="col text-center">
+          <h1>新規投稿フォーム</h1>
+        </div>
+      </div>
+      <div class="row py-3 ">
+        <div class="col">
+          <%= form_with model: @post, url: public_posts_path do |f| %>
+            <h4>タイトル</h4>
+            <%= f.text_field :title %>
+            <h4>本文</h4>
+            <%= f.text_area :introduction %>
+            <h4>ジャンル</h4>
+            <%= f.collection_select :genre_id, Genre.all, :id, :name %>
+            <div class="row"></div>
+              <%= f.submit '投稿する', class:"btn btn-info my-3" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

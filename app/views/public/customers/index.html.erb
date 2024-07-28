@@ -1,13 +1,14 @@
 <div class="container">
-  <div class="row py-3">
+  <h2 class="py-3 mt-5 text-center">会員一覧</h2>
+  <div class="row py-3 mb-5">
 
-    <h1></h1>
+    <div class="col">
+      <div class="row justify-content-end">
+        <%=link_to "グループを作成する",new_public_group_path %> |
+        <%=link_to "グループ一覧",public_groups_path %>
+      </div>
+    </div>
 
-    <%=link_to "グループを作成する",new_public_group_path %> |
-    <%=link_to "グループ一覧",public_groups_path %>
-  </div>
-
-  <div class="row">
     <table class="table table-hover table-inverse">
       <thead>
         <tr>
@@ -27,14 +28,16 @@
               <% end %>
             </td>
             <td><%= link_to customer.name, public_customer_path(customer) %></td>
-            <td><%= truncate(customer.introduction, length: 60) %></td>
+            <td><%= truncate(customer.introduction, length: 30) %></td>
           </tr>
         <% end %>
        <% end %>
       </tbody>
     </table>
 
-      <%= paginate @customers, theme: 'bootstrap-5' %>
+    <div class="mx-auto">
+      <%= paginate @customers, theme: 'bootstrap-5', class:"text-center" %>
+    </div>
 
   </div>
 </div>

@@ -25,10 +25,10 @@ class Public::GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @owner = Customer.find(@group.owner_id)
-    @group_approved = @group.group_requests.approved
+    @group_approved = @group.group_requests.approved.page(params[:approved_page]).per(9)
+    @group_rejected = @group.group_requests.rejected.page(params[:rejected_page]).per(9)
     @group_request = @group.group_requests.find_by(customer: current_customer)
-    @group_requests = @group.group_requests.pending
-    @group_requests = @group.group_requests.pending.page(params[:page]).per(9)
+    @group_requests = @group.group_requests.pending.page(params[:pending_page]).per(9)
   end
 
   def edit
@@ -40,6 +40,12 @@ class Public::GroupsController < ApplicationController
     else
       render "edit"
     end
+  end
+
+  def destroy
+    group = Group.find(params[:id])
+    group.destroy
+    redirect_to public_groups_path
   end
 
   private

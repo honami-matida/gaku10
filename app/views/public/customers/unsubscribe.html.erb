@@ -1,14 +1,27 @@
-<h1>Public::Customers#unsubscribe</h1>
-<p>本当に退会しますか？</p>
-<p>退会しない？(ボタン)</p>
-<p>退会する？(ボタン)</p>
+<div class="container">
+  <div class="row py-3 mt-5">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
 
-<h1>本当に退会しますか？</h1>
-  <p>
-    退会すると、会員登録情報や<br>
-    これまでの投稿が閲覧できなくなります。<br>
-    退会する場合は、「退会する」をクリックしてください。
-  </p>
+      <h1>退会確認</h1>
 
-  <%= link_to "退会しない", profile_public_customer_path, :class => "btn btn-primary ms-3" %>
-  <%= link_to "退会する", withdraw_public_customer_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
+      <div class="row py-3">
+        <h3><span>本当に退会しますか？</span></h3>
+          <p>
+            退会すると、会員登録情報や<br>
+            これまでの投稿が閲覧できなくなります。<br>
+            退会する場合は、「退会する」をクリックしてください。
+          </p>
+      </div>
+
+      <div class="row py-3">
+        <div class="col">
+          <%= link_to "退会しない", profile_public_customer_path, :class => "btn btn-primary" %>
+        </div>
+        <div class="col">
+          <%= link_to "退会する", withdraw_public_customer_path, method: :patch, :class => "btn btn-danger", data: { confirm: "本当に退会しますか？" }  %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

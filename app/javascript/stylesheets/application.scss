@@ -31,3 +31,37 @@ footer {
 table td {
   word-break : break-all;
 }
+
+.flame-border{
+  border: solid;
+  border-radius: 8px;
+  border-color: #93b3ca;
+}
+
+.search-btn{
+  text-align: center;
+  color: #fff;
+  background: #93b3ca;
+  border: 2px solid #93b3ca;
+  border-radius: 100vh;
+  text-decoration: none;
+}
+
+.header-btn{
+  display: block;
+  text-align: center;
+  vertical-align: text-top;
+  text-decoration: none;
+  color: black;
+}
+
+.header-btn-fill{
+  display: block;
+  text-align: center;
+  vertical-align: text-top;
+  color: #fff;
+  background: #93b3ca;
+  border: 2px solid #93b3ca;
+  border-radius: 100vh;
+  text-decoration: none;
+}

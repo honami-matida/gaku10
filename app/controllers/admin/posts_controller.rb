@@ -4,6 +4,7 @@ class Admin::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post_comments = @post.post_comments.all.page(params[:page]).per(9)
   end
 
   private

@@ -7,8 +7,8 @@ class Group < ApplicationRecord
   belongs_to :owner, class_name: 'Customer', foreign_key: 'owner_id' #会員id(オーナー)の取得
   belongs_to :genre
 
-  validates :name, presence: true
-  validates :introduction, presence: true
+  validates :name, presence: true, length: { minimum: 3, maximum: 50 }
+  validates :introduction, presence: true, length: { minimum: 10, maximum: 500 }
   has_one_attached :group_image
 
   def get_group_image(width, height)

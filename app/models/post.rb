@@ -7,8 +7,8 @@ class Post < ApplicationRecord
 
   has_many :week_favorites, -> { where(created_at: 1.week.ago.beginning_of_day..Time.current.end_of_day) }
 
-  validates :title, presence: true
-  validates :introduction, presence: true
+  validates :title, presence: true, length: { maximum: 100 }
+  validates :introduction, presence: true, length: { maximum: 2000 }
   validates :genre_id, presence: true
 
   scope :latest, -> {order(created_at: :desc)}

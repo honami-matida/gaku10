@@ -1,18 +1,24 @@
-<h1>ジャンル一覧</h1>
+<div class="container">
+  <div class="row py-3 mt-5">
 
-<table class="table table-hover table-inverse">
-  <thead>
-    <tr>
-      <td>ジャンル名</td>
-      <td>ジャンルについて</td>
-    </tr>
-  </thead>
-  <tbody>
-    <% @genres.each do |genre| %>
-      <tr>
-        <td><%= link_to  genre.name, public_genre_path(genre)%></td>
-        <td><%= genre.introduction %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <h1>ジャンル一覧</h1>
+
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <td>ジャンル名</td>
+          <td>ジャンルについて</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @genres.each do |genre| %>
+          <tr>
+            <td><%= link_to  genre.name, public_genre_path(genre)%></td>
+            <td><%= genre.introduction %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

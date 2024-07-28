@@ -19,10 +19,10 @@
           </tr>
           <tr>
             <td></td>
-            <td><%= f.submit "編集内容を保存", class:"btn btn-success" %></td>
             <td>
+              <%= f.submit "編集内容を保存", class:"btn btn-success" %>
               <% if @post.customer == current_customer %>
-                <%= link_to "削除する", public_post_path(@post), method: :delete, class:"btn btn-success ml-3" %>
+                <%= link_to "削除する", public_post_path(@post), method: :delete, class:"btn btn-danger offset-1" %>
               <% end %>
             </td>
           </tr>
