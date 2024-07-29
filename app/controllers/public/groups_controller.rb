@@ -1,6 +1,7 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_customer!
   before_action :ensure_correct_customer, only: [:edit, :update]
+  before_action :ensure_guest_customer, only: [:edit]
 
   def new
     @group = Group.new
@@ -56,10 +57,23 @@ class Public::GroupsController < ApplicationController
     params.require(:group).permit(:name, :introduction, :group_image, :genre_id)
   end
 
+  def authenticate_customer!
+    unless customer_signed_in?
+      flash[:alert] = "ログインが必要です。"
+      redirect_to root_path
+    end
+  end
+
+  def ensure_guest_customer
+    if current_customer.guest_customer?
+      redirect_to public_customer_path(current_customer) , notice: "ゲストユーザーはグループの編集ができません"
+    end
+  end
+
   def ensure_correct_customer
     @group = Group.find(params[:id])
     unless @group.owner_id == current_customer.id
-      redirect_to groups_path
+      redirect_to public_groups_path, alert: 'グループのオーナーではありません'
     end
   end
 

@@ -1,7 +1,7 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!, only: [:index, :show, :edit]
   before_action :ensure_current_customer, only: [:edit, :update]
   before_action :ensure_guest_customer, only: [:edit]
-  before_action :authenticate_customer!, only: [:edit]
 
   def index
     @customers = Customer.all.page(params[:page]).per(9)
@@ -43,6 +43,13 @@ class Public::CustomersController < ApplicationController
 
   private
 
+  def authenticate_customer!
+    unless customer_signed_in?
+      flash[:alert] = "ログインが必要です。"
+      redirect_to root_path
+    end
+  end
+
   def customer_params
     params.require(:customer).permit(:name, :email, :introduction, :profile_image)
   end
@@ -55,16 +62,8 @@ class Public::CustomersController < ApplicationController
   end
 
   def ensure_guest_customer
-    @customer = Customer.find(params[:id])
-    if @customer.guest_customer?
+    if current_customer.guest_customer?
       redirect_to public_customer_path(current_customer) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
-    end
-  end
-
-  def authenticate_customer!
-    unless customer_signed_in?
-      flash[:alert] = "ログインが必要です。"
-      redirect_to root_path
     end
   end
 end

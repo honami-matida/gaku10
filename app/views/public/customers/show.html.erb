@@ -55,7 +55,9 @@
         </div>
 
         <div class="row mb-5">
-          <% if customer_signed_in? && current_customer.id == @customer.id %>
+          <% if current_customer.guest_customer? %>
+            <div class="text-nowrap mx-auto"><%= link_to "ログインへ(About)", destroy_customer_session_path, method: :delete, class:"btn btn-outline-info offset-1" %></div>
+          <% else customer_signed_in? && current_customer.id == @customer.id %>
             <%= link_to "編集する", profile_edit_public_customer_path, class:"btn btn-info d-block mx-auto" %>
           <% end %>
         </div>

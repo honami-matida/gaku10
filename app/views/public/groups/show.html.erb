@@ -28,11 +28,13 @@
                   <% if @group.owner_id == current_customer.id %>
                     <td class="text-nowrap"><%= link_to '編集', edit_public_group_path(@group), class: "btn btn-info" %></td>
                     <td class="text-nowrap"><%= link_to "削除", public_group_path(@group), method: :delete, class:"btn btn-danger offset-1" %></td>
+                  <% elsif current_customer.guest_customer? %>
+                    <td class="text-nowrap"><%= link_to "ログインへ(About)", destroy_customer_session_path, method: :delete, class:"btn btn-outline-info offset-1" %></td>
                   <% else %>
 
                   <!--申請ボタン-->
                     <% if @group_request.nil? %>
-                      <td><%= button_to 'グループに申請', public_group_group_requests_path(@group), method: :post, class: "btn btn-primary" %></td>
+                      <td><%= button_to 'グループに申請', public_group_group_requests_path(@group), method: :post, class: "btn btn-info" %></td>
                     <% elsif @group_request.pending? %>
                       <td class="text-nowrap">申請中です。</td>
                     <% elsif @group_request.approved? %>
