@@ -1,7 +1,8 @@
-<div class="container">
-  <div class="row py-3 mt-5">
+<h3 class="py-3 mb-5 text-center">グループ一覧</h3>
 
-    <h1>グループ一覧</h1>
+<div class="container">
+  <div class="row py-3">
+
     <table class='table'>
       <thead>
         <tr>
@@ -22,12 +23,12 @@
               <%= image_tag group.get_group_image(50,50), class:"icon" %>
             </td>
             <td><%= link_to group.name,public_group_path(group) %></td>
-            <td><%= group.introduction %></td>
+            <td><%= truncate(group.introduction, length: 30) %></td>
             <td><%= image_tag group.owner.get_profile_image(50,50), class:"icon" %></td>
-            <td><%= group.owner.name %></td>
+            <td><%= truncate(group.owner.name, length: 15) %></td>
             <td><%= group.group_requests.approved.count %>人</td>
             <% if group.owner.id == current_customer.id %>
-              <td><%= link_to '編集', edit_public_group_path(group), class: "group_#{group.id} btn btn-sm btn-info" %>
+              <td><%= link_to '編集', edit_public_group_path(group), class: "group_#{group.id} btn btn-sm btn-info text-nowrap" %>
               </td>
             <% end %>
           </tr>
@@ -35,7 +36,9 @@
       </tbody>
     </table>
 
-    <%= paginate @groups, theme: 'bootstrap-5' %>
+    <div class="mx-auto">
+      <%= paginate @groups, theme: 'bootstrap-5', class:"text-center" %>
+    </div>
 
   </div>
 </div>

@@ -8,19 +8,19 @@
 Admin.create!(email: '123@456', password: '123456')
 
 a = Customer.find_or_create_by!(email: "aaa@aaa") do |customer|
-  customer.name = "a"
+  customer.name = "aaa"
   customer.password = "aaaaaa"
 
 end
 
 b = Customer.find_or_create_by!(email: "bbb@bbb") do |customer|
-  customer.name = "b"
+  customer.name = "bbb"
   customer.password = "bbbbbb"
 
 end
 
 c = Customer.find_or_create_by!(email: "ccc@ccc") do |customer|
-  customer.name = "c"
+  customer.name = "ccc"
   customer.password = "cccccc"
 
 end

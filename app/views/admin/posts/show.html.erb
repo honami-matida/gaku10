@@ -1,42 +1,76 @@
+<div class="text-center h3 mb-5 py-3", style="background: #EBF1F5;">
+  投稿詳細
+</div>
+
 <div class="container">
-  <div class="row h3 py-5">
-    <div class="col  mx-auto">
-      投稿詳細
-    </div>
-  </div>
 
-  <div class="row">
+  <div class="row flame-border p-3">
     <div class="col">
-      <p class="row">タイトル：<%= @post.title %></p>
-      <p class="row text-wrap">説明：<%= @post.introduction %></p>
-      <p class="row">ジャンル：<%= @post.genre.name %></p>
-      <p class="row">投稿ユーザー画像：<%= image_tag @post.customer.get_profile_image(50,50), class:"icon" %></p>
-      <p class="row">ユーザーネーム：<%= @post.customer.name %></p>
-      <p class="row">投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-    </div>
-  </div>
 
-<%#= link_to "削除する", admin_post_path(@post), method: :delete, class:"btn btn-success ml-3" %>
-
-  <div class="row">
-    <div class="col">
-      <p>コメント件数：<%= @post_comments.count %></p>
-      <% @post_comments.each do |post_comment| %>
-        <p><%= post_comment.comment %></p>
-        <div>
-          <%= image_tag post_comment.customer.get_profile_image(50,50), class:"icon" %>
-          <%= link_to admin_post_comment_path(post_comment) do %>
-            <%= post_comment.customer.name %>
-          <% end %>
-          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+      <div class="row border-bottom">
+        <div class="col-1 p-3">
+          <p class="">
+            <%= link_to admin_customer_path(@post.customer), style:"text-decoration: none;" do %>
+              <%= image_tag @post.customer.get_profile_image(50,50), class:"icon" %>
+            <% end %>
+          </p>
         </div>
-        <%#= link_to "削除", admin_post_post_comment_path(@post, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
-      <% end %>
+        <div class="col-11">
+          <p class=""><%= @post.customer.name %></p>
+          <p class=""><%= @post.created_at.strftime('%Y/%m/%d') %></p>
+        </div>
+      </div>
+
+      <div class="row border-bottom my-3">
+        <div class="col mx-auto">
+          <p class="">ジャンル：<%= @post.genre.name %></p>
+          <p class="col text-center text-wrap h3 py-3"><%= @post.title %></p>
+          <p class="text-wrap py-3"><%= @post.introduction %></p>
+        </div>
+      </div>
+
+
+
+      <div class="row p-3">
+          <%#= link_to "削除する", admin_post_path(@post), method: :delete, class:"btn btn-danger ml-3" %>
+      </div>
+
     </div>
   </div>
 
-  <div class="row mx-auto my-5">
-    <%= paginate @post_comments, theme: 'bootstrap-5' %>
+  <div class="row flame-border my-3 p-3">
+    <div class="col">
+
+      <p>コメント件数：<%= @total_comments_count %></p>
+      <% @post_comments.each do |post_comment| %>
+        <div class="row">
+          <div class="co-2 my-3 p-3">
+            <%= link_to admin_customer_path(post_comment.customer), style:"text-decoration: none;" do %>
+              <%= image_tag post_comment.customer.get_profile_image(50,50), class:"icon" %>
+            <% end %>
+          </div>
+          <div class="col-10 my-3 p-3", style="background: #EBF1F5; border-radius: 8px;" >
+
+            <div>
+              <%= post_comment.customer.name %>
+              <p class="text-wrap"><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+              <p class="text-wrap border-bottom py-3"><%= post_comment.comment %></p>
+
+              <%= link_to "削除", admin_post_comment_path(post_comment), method: :delete, class: "btn btn-danger" %>
+              <%= link_to "詳細へ", admin_post_comment_path(post_comment), class: "btn btn-info ml-3" %>
+
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <%= paginate @post_comments, theme: 'bootstrap-5' %>
+        </div>
+      </div>
+
+    </div>
   </div>
 
 </div>

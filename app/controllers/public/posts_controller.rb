@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :ensure_guest_customer, only: [:new]
-  before_action :authenticate_customer!, only: [:new, :show, :edit]
+  before_action :authenticate_customer!, only: [:new, :index, :show, :edit]
   before_action :is_matching_login_customer, only: [:edit, :update]
 
   def new
@@ -64,7 +64,7 @@ class Public::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to profile_public_customer_path(post.customer)
+    redirect_to profile_public_customer_path(post.customer), notice:"投稿を削除しました"
   end
 
   private

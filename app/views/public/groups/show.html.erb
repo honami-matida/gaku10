@@ -1,9 +1,10 @@
+<div class="text-center h3 mb-5 py-3">
+  グループ詳細
+</div>
+
 <div class='container'>
   <div class='row my-5'>
     <div class='col'>
-      <div class='row'>
-        <h2 class="col text-center">グループ詳細</h2>
-      </div>
       <div class='row'>
         <div class="mx-auto">
           <table class='table table-hover table-inverse'>
@@ -48,27 +49,23 @@
         </div>
       </div>
 
-      <div class='row py-3'>
-        <h3 class="mx-auto py-3">グループに所属している会員</h3>
-      </div>
+      <h3 class="text-center">グループに所属している会員</h3>
 
-      <div class='pt-3'>
-        <table class="table table-hover table-inverse">
+      <div class='row py-3  d-flex align-items-center border-bottom border-top'>
 
-          <tr>
-            <td>
-              <%= link_to public_customer_path(@group.owner), style:"text-decoration: none;" do %>
-                <%= image_tag @group.owner.get_profile_image(50,50), class:"icon" %>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to @group.owner.name, public_customer_path(@group.owner) %>
-            </td>
-            <td class="header-btn-fill small", style="width:150px">
-              グループオーナー
-            </td>
-          </tr>
-        </table>
+        <div  class="col-2">
+          <%= link_to public_customer_path(@group.owner), style:"text-decoration: none;" do %>
+            <%= image_tag @group.owner.get_profile_image(50,50), class:"icon" %>
+          <% end %>
+        </div>
+        <div class="col-6">
+          <%= link_to @group.owner.name, public_customer_path(@group.owner) %>
+        </div>
+        <div class="col-2 mr-1 offset-1 header-btn-fill small", style="width:50px">
+          グループオーナー
+        </div>
+
+
       </div>
 
       <div class='row py-3'>
@@ -81,31 +78,31 @@
               <th colspan="3"></th>
             </tr>
           </thead>
-            <tbody>
-              <% @group_approved.each do |approved| %>
-                <tr>
-                  <td>
-                    <%= link_to public_customer_path(approved.customer), style:"text-decoration: none;" do %>
-                      <%= image_tag approved.customer.get_profile_image(50,50), class:"icon" %>
-                    <% end %>
-                  </td>
-                  <td><%= link_to approved.customer.name, public_customer_path(approved.customer) %></td>
-                  <td>
-                    <% if approved.customer.is_active == true %>
-                      <span class="text-success">有効</span>
-                    <% else %>
-                      <%= "退会済み" %>
-                    <% end %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+          <tbody>
+            <% @group_approved.each do |approved| %>
+              <tr>
+                <td>
+                  <%= link_to public_customer_path(approved.customer), style:"text-decoration: none;" do %>
+                    <%= image_tag approved.customer.get_profile_image(50,50), class:"icon" %>
+                  <% end %>
+                </td>
+                <td><%= link_to approved.customer.name, public_customer_path(approved.customer) %></td>
+                <td>
+                  <% if approved.customer.is_active == true %>
+                    <span class="text-success">有効</span>
+                  <% else %>
+                    <%= "退会済み" %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
 
-          <div class="mx-auto">
-            <%= paginate @group_approved, theme: 'bootstrap-5', param_name: "approved_page", class:"text-center" %>
-          </div>
+        <div class="mx-auto">
+          <%= paginate @group_approved, theme: 'bootstrap-5', param_name: "approved_page", class:"text-center" %>
         </div>
+      </div>
 
       <!--申請の管理-->
       <% if @group.owner == current_customer %>

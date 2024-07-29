@@ -100,9 +100,6 @@
               <li class="navbar-brand pr-4 border-right">
                 <%= link_to "About", about_path, class: "text-dark" %>
               </li>
-              <li class="navbar-brand pr-4">
-                <%= link_to "投稿する", new_public_post_path, class: "text-dark" %>
-              </li>
             <% elsif admin_signed_in? %>
               <!-- 管理者がログインしている時 -->
               <li class="navbar-brand pr-4 border-right">

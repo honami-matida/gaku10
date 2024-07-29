@@ -1,3 +1,7 @@
+<div class="text-center h3 mb-5 py-3">
+  会員一覧
+</div>
+
 <div class="container">
   <div class="row py-3 mt-5">
 
@@ -35,7 +39,9 @@
        </tbody>
      </table>
 
-    <%= paginate @customers, theme: 'bootstrap-5' %>
+    <div class="row mx-auto my-5">
+      <%= paginate @customers, theme: 'bootstrap-5' %>
+    </div>
 
   </div>
 </div>

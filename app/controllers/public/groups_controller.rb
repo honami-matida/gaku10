@@ -38,6 +38,7 @@ class Public::GroupsController < ApplicationController
     if @group.update(group_params)
       redirect_to public_group_path(@group)
     else
+      flash.now[:alert] = "保存できません"
       render "edit"
     end
   end
