@@ -46,6 +46,7 @@ class Public::GroupsController < ApplicationController
   def destroy
     group = Group.find(params[:id])
     group.destroy
+    flash[:notice] = "グループを削除しました"
     redirect_to public_groups_path
   end
 

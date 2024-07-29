@@ -9,4 +9,11 @@ class Admin::GroupsController < ApplicationController
     @owner = Customer.find(@group.owner_id)
     @group_approved = @group.group_requests.approved
   end
+
+  def destroy
+    group = Group.find(params[:id])
+    group.destroy
+    flash[:notice] = "グループを削除しました"
+    redirect_to admin_groups_path
+  end
 end

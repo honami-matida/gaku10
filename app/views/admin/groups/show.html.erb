@@ -24,6 +24,7 @@
                 <td><%= @group.name %></td>
                 <td><%= @group.introduction %></td>
                 <td><%= @group.owner.name %></td>
+                <td class="text-nowrap"><%= link_to "削除", admin_group_path(@group), method: :delete, class:"btn btn-danger offset-1" %></td>
               </tr>
             </tbody>
           </table>

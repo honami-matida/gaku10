@@ -1,8 +1,8 @@
 class Group < ApplicationRecord
 
   has_many :group_users, dependent: :destroy
-  has_many :customers, through: :group_users
-  has_many :group_requests
+  has_many :customers, through: :group_users, dependent: :destroy
+  has_many :group_requests, dependent: :destroy
 
   belongs_to :owner, class_name: 'Customer', foreign_key: 'owner_id' #会員id(オーナー)の取得
   belongs_to :genre

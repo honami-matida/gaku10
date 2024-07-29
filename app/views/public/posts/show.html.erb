@@ -27,15 +27,17 @@
             <p class="col text-center text-wrap h3 py-3"><%= @post.title %></p>
             <p class="text-wrap py-3"><%= @post.introduction %></p>
             <div class="m-3", style="text-decoration: none;">
-              <% if @post.favorited_by?(current_customer) %>
-                <!--# 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
-                <%= link_to public_post_favorites_path(@post), method: :delete do %>
-                  <span style="color:red;">いいね︎️︎♥︎</span>
-                <% end %>
-              <% else %>
-                <!--# 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
-                <%= link_to public_post_favorites_path(@post), method: :post do %>
-                  <span style="color:black;">いいね︎♡</span>
+              <% unless current_customer.guest_customer? %>
+                <% if @post.favorited_by?(current_customer) %>
+                  <!--# 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+                  <%= link_to public_post_favorites_path(@post), method: :delete do %>
+                    <span style="color:red;">いいね︎️︎♥︎</span>
+                  <% end %>
+                <% else %>
+                  <!--# 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+                  <%= link_to public_post_favorites_path(@post), method: :post do %>
+                    <span style="color:black;">いいね︎♡</span>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>
@@ -57,11 +59,15 @@
     <div class="row p-3 mt-5 ">
       <div class="col-8 flame-border mx-auto", style="background: #EBF1F5;">
         <div class="m-3">
-          <%= form_with model: [@post, @post_comment], url: public_post_post_comments_path(@post, @post_comment), method: :post do |f| %>
-            <%= f.text_area :comment, rows:'4',cols:'50', placeholder: "コメントをここに入力して下さい", class: "text-area row mx-auto" %>
-            <div class="submit-btn">
-              <%= f.submit "送信する", class: "btn btn-info my-3 " %>
-            </div>
+          <% unless current_customer.guest_customer? %>
+            <%= form_with model: [@post, @post_comment], url: public_post_post_comments_path(@post, @post_comment), method: :post do |f| %>
+              <%= f.text_area :comment, rows:'4',cols:'50', placeholder: "コメントをここに入力して下さい", class: "text-area row mx-auto" %>
+              <div class="submit-btn">
+                <%= f.submit "送信する", class: "btn btn-info my-3 " %>
+              </div>
+            <% end %>
+          <% else %>
+            <p>コメントを投稿するにはログインしてください</p>
           <% end %>
         </div>
       </div>
