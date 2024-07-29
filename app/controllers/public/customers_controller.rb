@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  before_action :ensure_current_customer, only: [:edit, :update]
   before_action :ensure_guest_customer, only: [:edit]
   before_action :authenticate_customer!, only: [:edit]
 
@@ -44,6 +45,13 @@ class Public::CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:name, :email, :introduction, :profile_image)
+  end
+
+  def ensure_current_customer
+    customer = Customer.find(params[:id])
+    if current_customer != customer
+      redirect_to public_customer_path(current_customer), alert: '他のユーザーのプロフィールを編集することはできません。'
+    end
   end
 
   def ensure_guest_customer
