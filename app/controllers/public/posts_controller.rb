@@ -91,7 +91,7 @@ class Public::PostsController < ApplicationController
 
   def ensure_guest_customer
 
-    if current_customer.guest_customer?
+    if customer_signed_in? && current_customer.guest_customer?
       redirect_to public_customer_path(current_customer) , notice: "ゲストユーザーは新規投稿画面へ遷移できません。"
     end
   end
