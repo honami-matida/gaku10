@@ -8,6 +8,7 @@ class Public::PostCommentsController < ApplicationController
     if @post_comment.save
       redirect_to public_post_path(@post)
     else
+      @post_comments = @post.post_comments.all.page(params[:page]).per(9).order(created_at: :desc)
       flash.now[:notice] = "送信に失敗しました"
       render 'public/posts/show'
     end

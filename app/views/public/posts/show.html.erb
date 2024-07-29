@@ -29,7 +29,7 @@
             <div class="m-3", style="text-decoration: none;">
               <% if @post.favorited_by?(current_customer) %>
                 <!--# 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
-                <%= link_to public_post_favorite_path(@post), method: :delete do %>
+                <%= link_to public_post_favorites_path(@post), method: :delete do %>
                   <span style="color:red;">いいね︎️︎♥︎</span>
                 <% end %>
               <% else %>
@@ -46,7 +46,7 @@
 
         <div class="row p-3">
           <% if @post.customer == current_customer %>
-            <%= link_to "編集する", edit_public_post_path, class:"btn btn-info ml-3" %>
+            <%= link_to "編集する", edit_public_post_path(@post), class:"btn btn-info ml-3" %>
             <%= link_to "削除する", public_post_path(@post), method: :delete, class:"btn btn-danger ml-3" %>
           <% end %>
         </div>
