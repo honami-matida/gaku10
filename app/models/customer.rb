@@ -22,7 +22,7 @@ class Customer < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
-  validates :name, presence: true, length: { minimum: 3, maximum: 30 }
+  validates :name, presence: true, length: { minimum: 1, maximum: 30 }
   validates :introduction, length: { maximum: 500 }
   validates :email, presence: true
 

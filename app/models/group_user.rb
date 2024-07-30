@@ -1,4 +1,4 @@
 class GroupUser < ApplicationRecord
-  belongs_to :group, dependent: :destroy
-  belongs_to :customer, dependent: :destroy
+  belongs_to :group
+  belongs_to :customer
 end

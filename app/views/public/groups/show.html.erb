@@ -36,11 +36,11 @@
                     <% if @group_request.nil? %>
                       <td><%= button_to 'グループに申請', public_group_group_requests_path(@group), method: :post, class: "btn btn-info" %></td>
                     <% elsif @group_request.pending? %>
-                      <td class="text-nowrap">申請中です。</td>
+                      <td class="text-nowrap">申請中です</td>
                     <% elsif @group_request.approved? %>
                       <td class="text-nowrap">グループのメンバーです</td>
                     <% elsif @group_request.rejected? %>
-                      <td class="text-nowrap">申請が拒否されました。</td>
+                      <td class="text-nowrap">申請が拒否されました</td>
                     <% end %>
 
                   <% end %>

@@ -20,7 +20,7 @@
 
         <div class="form-group text-center">
           <%= f.submit "編集内容を保存", class: 'btn btn-info' %>
-          <%= link_to "グループを削除", public_group_path(@group), method: :delete, class:"btn btn-danger ml-3" %>
+          <%= link_to "グループを削除", public_group_path(@group.id), method: :delete, class:"btn btn-danger ml-3" %>
         </div>
       <% end %>
     </div>
