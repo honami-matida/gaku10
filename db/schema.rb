@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_22_123316) do
+ActiveRecord::Schema.define(version: 2024_08_03_132148) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -108,6 +108,18 @@ ActiveRecord::Schema.define(version: 2024_07_22_123316) do
     t.index ["owner_id"], name: "index_groups_on_owner_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "subject_type"
+    t.integer "subject_id"
+    t.integer "end_user_id"
+    t.string "action_type", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_notifications_on_end_user_id"
+    t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject"
+  end
+
   create_table "post_comments", force: :cascade do |t|
     t.integer "post_id"
     t.integer "customer_id"
@@ -125,9 +137,17 @@ ActiveRecord::Schema.define(version: 2024_07_22_123316) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "group_requests", "customers"
   add_foreign_key "group_requests", "groups"
   add_foreign_key "groups", "customers", column: "owner_id"
+  add_foreign_key "notifications", "end_users"
 end
