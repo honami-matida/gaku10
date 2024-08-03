@@ -70,7 +70,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :introduction, :genre_id)
+    params.require(:post).permit(:title, :introduction, :genre_id, images: [])
   end
 
   def authenticate_customer!

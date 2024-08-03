@@ -26,6 +26,11 @@
             <p class="">ジャンル：<%= @post.genre.name %></p>
             <p class="col text-center text-wrap h3 py-3"><%= @post.title %></p>
             <p class="text-wrap py-3"><%= @post.introduction %></p>
+            <% if @post.images.attached? %>
+              <% @post.images.each do |image| %>
+                <%= image_tag image, size: '500x500' %>
+              <% end %>
+            <% end %>
             <div class="m-3", style="text-decoration: none;">
               <% unless current_customer.guest_customer? %>
                 <% if @post.favorited_by?(current_customer) %>

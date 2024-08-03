@@ -7,6 +7,8 @@ class Post < ApplicationRecord
 
   has_many :week_favorites, -> { where(created_at: 1.week.ago.beginning_of_day..Time.current.end_of_day) }
 
+  has_many_attached :images
+
   validates :title, presence: true, length: { maximum: 100 }
   validates :introduction, presence: true, length: { maximum: 2000 }
   validates :genre_id, presence: true

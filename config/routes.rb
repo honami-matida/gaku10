@@ -29,6 +29,8 @@ Rails.application.routes.draw do
         patch 'profile', to: 'customers#update'
         get 'unsubscribe', to: 'customers#unsubscribe', as: 'unsubscribe'
         patch 'withdraw', to: 'customers#withdraw', as: 'withdraw'
+
+        get :favorites
       end
     end
 

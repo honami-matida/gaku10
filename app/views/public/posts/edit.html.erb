@@ -18,6 +18,15 @@
             <td><%= f.collection_select :genre_id, Genre.all, :id, :name %></td>
           </tr>
           <tr>
+            <td>
+              <%= f.label :画像 %>
+            </td>
+            <td>
+              <%= f.file_field :images, multiple: true, accept: "image/*" %>
+
+            </td>
+          </tr>
+          <tr>
             <td></td>
             <td>
               <%= f.submit "編集内容を保存", class:"btn btn-info" %>

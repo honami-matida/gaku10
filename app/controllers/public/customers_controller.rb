@@ -1,5 +1,5 @@
 class Public::CustomersController < ApplicationController
-  before_action :authenticate_customer!, only: [:index, :show, :edit]
+  before_action :authenticate_customer!, only: [:index, :show, :edit, :favorites]
   before_action :ensure_current_customer, only: [:edit, :update]
   before_action :ensure_guest_customer, only: [:edit]
 
@@ -39,6 +39,13 @@ class Public::CustomersController < ApplicationController
     reset_session
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to new_customer_registration_path
+  end
+
+  def favorites
+    @customer = Customer.find(params[:id])
+    favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
+    @favorite_posts = Post.where(id: favorites).page(params[:page]).per(9)
+    @post = Post.find(params[:id])
   end
 
   private
