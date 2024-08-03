@@ -111,12 +111,12 @@ ActiveRecord::Schema.define(version: 2024_08_03_132148) do
   create_table "notifications", force: :cascade do |t|
     t.string "subject_type"
     t.integer "subject_id"
-    t.integer "end_user_id"
+    t.integer "customer_id"
     t.string "action_type", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_user_id"], name: "index_notifications_on_end_user_id"
+    t.index ["customer_id"], name: "index_notifications_on_customer_id"
     t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject"
   end
 
@@ -149,5 +149,5 @@ ActiveRecord::Schema.define(version: 2024_08_03_132148) do
   add_foreign_key "group_requests", "customers"
   add_foreign_key "group_requests", "groups"
   add_foreign_key "groups", "customers", column: "owner_id"
-  add_foreign_key "notifications", "end_users"
+  add_foreign_key "notifications", "customers"
 end
