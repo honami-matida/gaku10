@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
     # Public Groups
     resources :groups, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-      resources :group_requests, only: [:create, :update]
+      resources :group_requests, only: [:create, :update, :destroy]
     end
 
     resources :genres, only: [:index, :show]
