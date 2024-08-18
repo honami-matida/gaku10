@@ -37,24 +37,12 @@
               <% end %>
             </div>
             <div class="m-3", style="text-decoration: none;">
-              <% unless current_customer.guest_customer? %>
-                <% if @post.favorited_by?(current_customer) %>
-                  <!--# 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
-                  <%= link_to public_post_favorites_path(@post), method: :delete, remote: true do %>
-                    <span style="color:red;">いいね︎️︎♥︎</span>
-                  <% end %>
-                <% else %>
-                  <!--# 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
-                  <%= link_to public_post_favorites_path(@post), method: :post, remote: true do %>
-                    <span style="color:black;">いいね︎♡</span>
-                  <% end %>
-                <% end %>
-              <% end %>
+              <div id="favorite_btn_<%= @post.id%>" >
+                <%= render "public/favorites/btn", post: @post %>
+              </div>
             </div>
           </div>
         </div>
-
-
 
         <div class="row p-3">
           <% if @post.customer == current_customer %>
@@ -70,8 +58,8 @@
       <div class="col-8 flame-border mx-auto", style="background: #EBF1F5;">
         <div class="m-3">
           <% unless current_customer.guest_customer? %>
-            <%= form_with model: [@post, @post_comment], url: public_post_post_comments_path(@post, @post_comment), method: :post do |f| %>
-              <%= f.text_area :comment, rows:'4',cols:'50', placeholder: "コメントをここに入力して下さい", class: "text-area row mx-auto" %>
+            <%= form_with model: [@post, @post_comment], local: false, url: public_post_post_comments_path(@post, @post_comment), method: :post do |f| %>
+              <%= f.text_area :comment, rows:'4',cols:'50', placeholder: "コメントをここに入力して下さい", class: "text-area row mx-auto", id: "comment_textarea" %>
               <div class="submit-btn">
                 <%= f.submit "送信する", class: "btn btn-info my-3 " %>
               </div>
@@ -86,28 +74,9 @@
     <div class="row flame-border my-3 p-3">
       <div class="col">
 
-          <p>コメント件数：<%= @post.post_comments.count %></p>
-          <% @post_comments.each do |post_comment| %>
-            <div class="row">
-              <div class="co-2 my-3 p-3">
-                <%= link_to public_customer_path(post_comment.customer), style:"text-decoration: none;" do %>
-                  <%= image_tag post_comment.customer.get_profile_image(50,50), class:"icon" %>
-                <% end %>
-              </div>
-              <div class="col-10 my-3 p-3", style="background: #EBF1F5; border-radius: 8px;" >
-
-                <div>
-                  <%= post_comment.customer.name %>
-                  <p class="text-wrap"><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
-                  <p class="text-wrap border-bottom py-3"><%= post_comment.comment %></p>
-
-                  <% if post_comment.customer == current_customer %>
-                   <%= link_to "削除", public_post_post_comment_path(@post, post_comment), method: :delete, class: "btn btn-danger" %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          <% end %>
+        <div id="comment_index">
+          <%= render "public/post_comments/index", book: @book %>
+        </div>
 
       </div>
     </div>
